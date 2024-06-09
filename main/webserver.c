@@ -92,7 +92,7 @@ static esp_err_t led_status_handler(httpd_req_t *req)
 			gpio_set_level(LED, 0);
 		}
 		else{
-			ret |= httpd_resp_set_status(req, HTTPD_400);
+			ret |= httpd_resp_send_err(req, HTTPD_404_NOT_FOUND, "Query prams not found");
 			ESP_LOGW(TAG, "Query prams not found");
 		}
 	}
