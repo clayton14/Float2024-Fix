@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- <script type="module" src="test.js"></script> -->
+    <style id="default">
+        div {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 2%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+    <style id="form">
+        .button {
+            border: none;
+            background-color: #282e39;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            border: none;
+            background-color: #363d4b;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: #000000;
+        }
+
+
+        .graph_container {
+            float: right;
+            margin-right: 1%;
+            width: 10%;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=range],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=number],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #282e39;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=checkbox] {
+            transform: scale(1.7);
+            float: right;
+            background-color: #282e39;
+            padding: 20px;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #454455;
+        }
+
+        .form_box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            float: left;
+            max-width: 300px;
+            margin-left: 1%;
+            width: 25%;
+
+        }
+
+        .container {
+            display: flex;
+            padding: 1%;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        @media screen and (max-width: 850px) {
+            body{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .form_box {
+                display: flex ;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: flex-start;
+                padding: 1%;
+                gap: 4px;
+            }
+
+            .graph_container {
+                display: flex;
+                flex-wrap: wrap;
+                margin-right: 1%;
+                justify-content: space-evenly;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form_box">
+        <div class="container">
+            <h2>WUROV Float WebServer</h2>
+        </div>
+
+        <h3 id="led_state">LED State: OFF</h3>
+        <div class="container">
+            <button class="button" id="ledon" onclick="led_on_callback()">LED ON</button>
+            <button class="button" id="ledoff" onclick="led_off_callback()">LED OFF</button>
+        </div>
+
+        <h3 id="step_state">STEP PIN State: LOW</h3>
+        <div class="container">
+            <button class="button" id="dirHIGH" onclick="step_high_callback()">HIGH</button>
+            <button class="button" id="dirLOW" onclick="step_low_callback()">LOW</button>
+        </div>
+        <h2>Launch Config</h2>
+        <div class="container">
+            <!-- for to send launch config -->
+            <form action="launch">
+
+
+                <label for="set_depth">Depth Setpoint</label>
+                <input type="number" id="set_depth" name="Depth Setpoint" placeholder="Depth Units">
+
+                <label for="sub_time">Submerge Time (ms)</label>
+                <input type="number" id="sub_time" name="Submerge Time (ms)" placeholder="mS">
+
+
+                <label for="max_depth">Return Depth</label>
+                <input type="number" name="" id="max_depth" placeholder="mS">
+
+
+                <!-- <label for="log_data">Enable logging</label>
+                <input type="checkbox" name="" id="log_data"> -->
+
+                <!-- Replace on input with js functions -->
+
+                <input type="submit" value="Launch">
+            </form>
+        </div>
+    </div>
+    <!-- 
+    <div class="graph_container">
+      
+        <p>put graph and data over here</p>
+    </div> -->
+
+
+</body>
+<script>
+    // LED ON OFF
+    var ledon_button = document.getElementById("ledon")
+    var ledoff_button = document.getElementById("ledoff")
+    var led_state = document.getElementById("led_state");
+    // STEP DIR
+    var dirHIGH_button = document.getElementById("dirHIGH");
+    var dirLOW_button = document.getElementById("dirLOW");
+    var step_state = document.getElementById("step_state");
+
+
+    async function led_on_callback() {
+        console.log("is it work");
+        const response = await fetch("/led?status=on",
+            {
+                method: "post",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+        if (response.ok) {
+            led_state.textContent = "LED State: ON";
+        } else {
+            led_state.textContent = `LED State: ERROR ${response.status}`;
+            console.log(response.status);
+        }
+    }
+
+    async function led_off_callback() {
+        console.log("is it work");
+        const response = await fetch("/led?status=off",
+            {
+                method: "post",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+        if (response.ok) {
+            led_state.textContent = "LED State: OFF";
+        } else {
+            led_state.textContent = `LED State: ERROR ${response.status}`;
+            console.log(response.status);
+        }
+    }
+
+
+
+</script>
+
+</html>
