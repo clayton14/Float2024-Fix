@@ -12,7 +12,6 @@ static const char *TAG = "main";
 void app_main(void)
 {
 
-// TODO Run webserver
     void *param = NULL; 
     TaskHandle_t stepper_init_task = NULL;
     TaskHandle_t ws_task = NULL;
@@ -27,6 +26,8 @@ void app_main(void)
     
 // TODO impliment pressure sensor https://github.com/bluerobotics/BlueRobotics_MS5837_Library/blob/master/src/MS5837.cpp
 // TODO log and save data to CSV file 
+// TODO add timer and interrupts 
+// TODO Start timer when launch request is made
 // send data to website
 
 }
